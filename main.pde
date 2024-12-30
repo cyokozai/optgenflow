@@ -90,12 +90,6 @@ void setup() {
     println("Configure the settings and press 'start' to begin optimization.");
 
     frameRate(50);
-
-    gif = new GifMaker(this, "./image/" + benchmark + "_" + method + ".gif");
-    fc  = frameCount;
-    gif.setRepeat(0);
-    gif.setQuality(10);
-    gif.setDelay(20);
 }
 
 void draw() {
@@ -103,6 +97,14 @@ void draw() {
         return;
     } else {
         generation++;
+    }
+
+    if (generation == 1 && movie == true) {
+        gif = new GifMaker(this, "./image/" + benchmark + "_" + method + ".gif");
+        fc  = frameCount;
+        gif.setRepeat(0);
+        gif.setQuality(10);
+        gif.setDelay(40);
     }
 
     background(255);
