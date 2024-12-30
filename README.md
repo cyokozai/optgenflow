@@ -11,6 +11,7 @@ ____\ \_\ \\ \ \L\ \\ \ \___ \ \/, \/\  __/ /\ \/\ \\ \ \/    \_\ \_ /\ \L\ \\ \
 ```
 
 # OptGenFlow
+
 ## A Visual Tool for Understanding Genetic Algorithms  
 
 **OptGenFlow** is an interactive and educational application specifically designed to help users visually understand the workings and mechanisms of genetic algorithms (GAs). 
@@ -19,7 +20,8 @@ ____\ \_\ \\ \ \L\ \\ \ \___ \ \/, \/\  __/ /\ \/\ \\ \ \/    \_\ \_ /\ \L\ \\ \
 
 ---
 
-#### **What Are Genetic Algorithms?**  
+#### **What Are Genetic Algorithms?**
+
 Genetic algorithms are a type of optimization algorithm inspired by the principles of natural selection and evolution. They are commonly used to solve complex problems where traditional optimization methods may be inefficient or inapplicable. GAs work by iteratively evolving a population of candidate solutions toward an optimal result, using techniques such as selection, crossover, and mutation.  
 
 ---
