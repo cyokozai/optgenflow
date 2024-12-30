@@ -1,9 +1,14 @@
 String version = "1.0.0";
 
 import controlP5.*;
+import gifAnimation.*;
 
 ControlP5 cp5;
 boolean startOptimization = false;
+
+GifMaker gif;
+int fc;
+boolean movie = false;
 
 float[][] population; // population
 float[] best;         // best individual
@@ -73,8 +78,24 @@ void setup() {
                 cp5.hide();
            }
        });
+
+    cp5.addCheckBox("recordGif")
+       .setPosition(20, 620)
+       .setSize(20, 20)
+       .setItemsPerRow(1)
+       .setSpacingColumn(50)
+       .addItem("Record GIF", 0);
+
     println("OptGenFlow " + version);
     println("Configure the settings and press 'start' to begin optimization.");
+
+    frameRate(50);
+
+    gif = new GifMaker(this, "./image/" + benchmark + "_" + method + ".gif");
+    fc  = frameCount;
+    gif.setRepeat(0);
+    gif.setQuality(10);
+    gif.setDelay(20);
 }
 
 void draw() {
@@ -109,10 +130,24 @@ void draw() {
     }
 
     if (generation < MAX_GENERATION) {
+        if (movie == true) {
+            gif.addFrame();
+        }
+
         evolvePopulation();
+
         println("Best individual: [" + nf(best[0], 0, 4) + ", " + nf(best[1], 0, 4) + "]");
         println("Best fitness: " + evaluationFunction(objectiveFunction(best, benchmark)));
     } else {
+        startOptimization = false;
+
+        if (movie == true) {
+            gif.finish();
+            movie = false;
+
+            println("Saved gif");
+        }
+
         println("\nOptimization finished");
         println("Best individual: [" + nf(best[0], 0, 4) + ", " + nf(best[1], 0, 4) + "]");
         println("Best fitness: " + evaluationFunction(objectiveFunction(best, benchmark)));
@@ -134,11 +169,16 @@ void draw() {
            .setText(str(evaluationFunction(objectiveFunction(best, benchmark))))
            .setColor(color(0, 0, 0))
            .setColorBackground(color(255, 190, 0));
-
-        startOptimization = false;
     }
 
     delay(50);
+}
+
+void mousePressed() {
+    if (mouseX > 20 && mouseX < 40 && mouseY > 620 && mouseY < 640) {
+        movie = !movie;
+        println("Movie recording: " + movie);
+    }
 }
 
 void initializePopulation() {
@@ -174,6 +214,14 @@ void initializePopulation() {
     }
 
     best = population[0].clone();
+
+    if (cp5.get(CheckBox.class, "recordGif").getState(0)) {
+        movie = true;
+        gif = new GifMaker(this, "./image/" + benchmark + "_" + method + ".gif");
+        gif.setRepeat(0);
+        gif.setQuality(10);
+        gif.setDelay(20);
+    }
 
     println("Start optimization with " + method + " method");
 }
