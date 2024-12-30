@@ -15,7 +15,7 @@ ____\ \_\ \\ \ \L\ \\ \ \___ \ \/, \/\  __/ /\ \/\ \\ \ \/    \_\ \_ /\ \L\ \\ \
 
 **OptGenFlow** is an interactive and educational application specifically designed to help users visually understand the workings and mechanisms of genetic algorithms (GAs). 
 
-<img align="right" src="./image/SPHERE_GA.gif" alt="logo" width=200cm>
+![sphere-ga](./image/SPHERE_GA.gif)
 
 ---
 
