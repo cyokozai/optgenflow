@@ -231,6 +231,8 @@ void initializePopulation() {
 void evolvePopulation() {
     if (method.equals("GA")) {
         geneticAlgorithm();
+    } else if (method.equals("DE")) {
+        differentialEvolution();
     } else {
         println("Unknown method: " + method);
         exit();

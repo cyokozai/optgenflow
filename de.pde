@@ -50,7 +50,7 @@ void differentialEvolution() {
             }
         }
 
-        if (evaluationFunction(objectiveFunction(trial, benchmark)) < evaluationFunction(objectiveFunction(population[i], benchmark))) {
+        if (evaluationFunction(objectiveFunction(trial, benchmark)) > evaluationFunction(objectiveFunction(population[i], benchmark))) {
             newPopulation[i] = trial;
         } else {
             newPopulation[i] = population[i];

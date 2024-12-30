@@ -6,7 +6,7 @@ String benchmark = "SPHERE";
 
 String method = "GA";
 
-float F = 0.6;
+float F = 0.4;
 
 float CR = 0.8;
 
