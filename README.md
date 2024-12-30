@@ -1,4 +1,4 @@
-<img align="right" src="./image/SPHERE_GA.gif" alt="logo" width=400cm>
+<img align="right" src="./image/SPHERE_GA.gif" alt="logo" width=200cm>
 
 ```text
  _____         ______     ____                _________   _____
