@@ -1,5 +1,3 @@
-<img align="right" src="./image/SPHERE_GA.gif" alt="logo" width=200cm>
-
 ```text
  _____         ______     ____                _________   _____
 /\  __`\         __\ \__ /\  _`\                ___\  _`\   __ \
@@ -16,6 +14,8 @@ ____\ \_\ \\ \ \L\ \\ \ \___ \ \/, \/\  __/ /\ \/\ \\ \ \/    \_\ \_ /\ \L\ \\ \
 ## A Visual Tool for Understanding Genetic Algorithms  
 
 **OptGenFlow** is an interactive and educational application specifically designed to help users visually understand the workings and mechanisms of genetic algorithms (GAs). 
+
+<img align="right" src="./image/SPHERE_GA.gif" alt="logo" width=200cm>
 
 ---
 
