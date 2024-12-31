@@ -157,7 +157,7 @@ void draw() {
     float bestFitness = evaluationFunction(objectiveFunction(best, benchmark));
 
     fill(255, 0, 0);
-    ellipse(bestX, bestY, 10, 10);
+    ellipse(bestX, bestY, 7, 7);
     fill(0);
     textSize(14);
     textAlign(CENTER);
