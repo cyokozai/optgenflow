@@ -195,12 +195,6 @@ void initializePopulation() {
     population = new float[N][dimensions];
     best       = new float[dimensions];
 
-    if (method.equals("ABC")) {
-        for (int i = 0; i < N; i++) {
-            trialCounter[i] = 0;
-        }
-    }
-
     if (benchmark.equals("SPHERE")) {
         UPP =  5.0;
         LOW = -5.0;

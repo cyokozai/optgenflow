@@ -1,3 +1,20 @@
+void setup() {
+    if (benchmark.equals("SPHERE")) {
+        float F  = 0.4;
+        float CR = 0.6;
+    } else if (benchmark.equals("ROSENBROCK")) {
+        float F  = 0.5;
+        float CR = 0.8;
+    } else if (benchmark.equals("RASTRIGIN")) {
+        float F  = 0.5;
+        float CR = 0.7;
+    } else {
+        println("Unknown benchmark type: " + benchmark);
+
+        exit();
+    }
+}
+
 float[][] bincrossover(float[] parent1, float[] parent2) {
     int point1 = int(random(dimensions));
     int point2 = int(random(dimensions));

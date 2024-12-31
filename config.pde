@@ -14,7 +14,7 @@ float ELITE_RATE = 0.10;
 float MUTATION_RATE = 0.01;
 
 // Differential Evolution
-float F = 0.5;
+float F  = 0.5;
 
 float CR = 0.8;
 
