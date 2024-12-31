@@ -25,6 +25,15 @@ jobs:
         sudo mv processing-4.3.1 /usr/local/processing
         sudo ln -s /usr/local/processing/processing-java /usr/local/bin/processing-java
 
+    - name: Install Processing libraries
+      run: |
+        mkdir -p ~/sketchbook/libraries
+        cd ~/sketchbook/libraries
+        wget https://github.com/sojamo/controlp5/releases/download/v2.3.0/controlP5-2.3.0.zip
+        unzip controlP5-2.3.0.zip
+        wget https://github.com/01010101/GifAnimation/releases/download/3.0.0/GifAnimation.zip
+        unzip GifAnimation.zip
+
     - name: Verify installation
       run: processing-java --help
 
