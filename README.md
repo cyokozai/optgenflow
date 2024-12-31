@@ -61,3 +61,7 @@ Genetic algorithms are a type of optimization algorithm inspired by the principl
 ### **Why OptGenFlow?**  
 
 By transforming abstract algorithmic processes into clear, engaging visualizations, OptGenFlow makes the power of genetic algorithms accessible to a wider audience. Whether you’re seeking to understand the fundamentals or refine optimization strategies, OptGenFlow provides the tools and insights needed to master genetic algorithms effectively.
+
+![sphere-ga](./image/SPHERE_GA.gif)
+![sphere-ga](./image/RASTRIGIN_ABC.gif)
+![sphere-ga](./image/ROSENBROCK_DE.gif)
