@@ -26,8 +26,12 @@ jobs:
         sudo ln -s /usr/local/processing/processing-java /usr/local/bin/processing-java
 
     - name: Verify installation
-      run: processing-java --version
+      run: processing-java --help
 
     - name: Run Processing sketch
       run: |
-        processing-java --sketch=`pwd`./ --run
+        processing-java ./ --run
+    
+    - name: Build Processing sketch
+      run: |
+        processing-java ./ --build
