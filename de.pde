@@ -43,7 +43,7 @@ void differentialEvolution() {
         }
 
         for (int j = 0; j < dimensions; j++) {
-            if (random(1) < CR || j == int(random(dimensions))) {
+            if (random(1.0) < CR || j == int(random(dimensions))) {
                 trial[j] = mutant[j];
             } else {
                 trial[j] = population[i][j];

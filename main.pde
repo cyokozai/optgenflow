@@ -54,20 +54,32 @@ void setup() {
        .setAutoClear(false)
        .setText(str(MAX_GENERATION));
 
-    cp5.addTextfield("The rate of elite selection")
+    cp5.addTextfield("GA: The rate of elite selection")
        .setPosition(20, 410)
        .setSize(200, 40)
        .setAutoClear(false)
        .setText(str(ELITE_RATE));
 
-    cp5.addTextfield("The rate of mutation")
+    cp5.addTextfield("GA: The rate of mutation")
        .setPosition(20, 480)
        .setSize(200, 40)
        .setAutoClear(false)
        .setText(str(MUTATION_RATE));
 
+    cp5.addTextfield("DE: The scaling factor (F)")
+       .setPosition(20, 550)
+       .setSize(200, 40)
+       .setAutoClear(false)
+       .setText(str(F));
+
+    cp5.addTextfield("DE: The crossover rate (CR)")
+       .setPosition(20, 620)
+       .setSize(200, 40)
+       .setAutoClear(false)
+       .setText(str(CR));
+
     cp5.addButton("start")
-       .setPosition(20, 560)
+       .setPosition(20, 690)
        .setSize(200, 40)
        .setColorBackground(color(30, 220, 80))
        .onClick(new CallbackListener() {
@@ -80,7 +92,7 @@ void setup() {
        });
 
     cp5.addCheckBox("recordGif")
-       .setPosition(20, 620)
+       .setPosition(620, 760)
        .setSize(20, 20)
        .setItemsPerRow(1)
        .setSpacingColumn(50)
@@ -131,7 +143,26 @@ void draw() {
         text(nf(fitness, 0, 4), x, y - 10);
     }
 
-    if (generation < MAX_GENERATION) {
+    // ベンチマークの最小値の座標に☆マークを表示
+    float minX = 0;
+    float minY = 0;
+    if (benchmark.equals("SPHERE") || benchmark.equals("RASTRIGIN")) {
+        minX = 0;
+        minY = 0;
+    } else if (benchmark.equals("ROSENBROCK")) {
+        minX = 1;
+        minY = 1;
+    }
+    float starX = map(minX, LOW, UPP, 0, width);
+    float starY = map(minY, LOW, UPP, height, 0);
+    fill(255, 215, 0);
+    textSize(18);
+    textAlign(CENTER);
+    text("☆", starX, starY + 5);
+    textSize(14);
+    text("x: " + nf(minX, 0, 2) + ", y: " + nf(minY, 0, 2), starX, starY + 20);
+
+    if (generation < MAX_GENERATION && evaluationFunction(objectiveFunction(best, benchmark)) <= 0.9999) {
         if (movie == true) {
             gif.addFrame();
         }
@@ -177,7 +208,7 @@ void draw() {
 }
 
 void mousePressed() {
-    if (mouseX > 20 && mouseX < 40 && mouseY > 620 && mouseY < 640) {
+    if (mouseX > 20 && mouseX < 40 && mouseY > 760 && mouseY < 780) {
         movie = !movie;
         println("Movie recording: " + movie);
     }
@@ -189,9 +220,11 @@ void initializePopulation() {
     benchmark      = cp5.get(Textfield.class, "Which benchmark function? \n (SPHERE, ROSENBROCK, RASTRIGIN)").getText();
     method         = cp5.get(Textfield.class, "Which optimization method? \n (GA, DE, ABC)").getText();
     MAX_GENERATION = int(cp5.get(Textfield.class, "The number of maximum generations").getText());
-    ELITE_RATE     = float(cp5.get(Textfield.class, "The rate of elite selection").getText());
-    MUTATION_RATE  = float(cp5.get(Textfield.class, "The rate of mutation").getText());
-
+    ELITE_RATE     = float(cp5.get(Textfield.class, "GA: The rate of elite selection").getText());
+    MUTATION_RATE  = float(cp5.get(Textfield.class, "GA: The rate of mutation").getText());
+    F              = float(cp5.get(Textfield.class, "DE: The scaling factor (F)").getText());
+    CR             = float(cp5.get(Textfield.class, "DE: The crossover rate (CR)").getText());
+    
     population = new float[N][dimensions];
     best       = new float[dimensions];
 
@@ -207,6 +240,14 @@ void initializePopulation() {
     } else {
         println("Unknown benchmark type: " + benchmark);
         exit();
+    }
+
+    if (method.equals("ABC")) {
+        trialCounter = new int[N];
+
+        for (int i = 0; i < N; i++) {
+            trialCounter[i] = 0;
+        }
     }
     
     for (int i = 0; i < N; i++) {
@@ -233,6 +274,8 @@ void evolvePopulation() {
         geneticAlgorithm();
     } else if (method.equals("DE")) {
         differentialEvolution();
+    } else if (method.equals("ABC")) {
+        artificialBeeColony();
     } else {
         println("Unknown method: " + method);
         exit();
