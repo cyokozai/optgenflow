@@ -1,10 +1,10 @@
 int[] trialCounter;
 
-int roulleteSelection(float[][] flowers, float[] cum_probs) {
+int roulleteSelection(float[] cum_probs) {
     float r = random(1.0);
     int i = 0;
     
-    while (r < cum_probs[i]) {
+    while (i < cum_probs.length && r > cum_probs[i]) {
         i++;
     }
     
@@ -62,7 +62,7 @@ float[][] onlookerBees(float[][] flowers) {
     }
 
     for (int i = 0; i < N; i++) {
-        cumFlower = flowers[roulleteSelection(flowers, cumP)];
+        cumFlower = flowers[roulleteSelection(cumP)];
         
         for (int j = 0; j < dimensions; j++) {
             do {

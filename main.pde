@@ -274,6 +274,8 @@ void evolvePopulation() {
         geneticAlgorithm();
     } else if (method.equals("DE")) {
         differentialEvolution();
+    } else if (method.equals("ABC")) {
+        artificialBeeColony();
     } else {
         println("Unknown method: " + method);
         exit();
