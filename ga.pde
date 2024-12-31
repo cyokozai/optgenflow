@@ -53,7 +53,7 @@ void mutate(float[] individual) {
         if (random(1.0) < MUTATION_RATE) {
             individual[i] = random(LOW, UPP);
         }
-    8
+    }
 }
 
 void geneticAlgorithm() {
