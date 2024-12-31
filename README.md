@@ -9,7 +9,7 @@ ____\ \_\ \\ \ \L\ \\ \ \___ \ \/, \/\  __/ /\ \/\ \\ \ \/____\_\ \_ /\ \L\ \\ \
              ___\_\
                ___/
 ```
-　　　　　　　　　　　　
+
 # OptGenFlow
 
 ## A Visual Tool for Understanding Genetic Algorithms  
