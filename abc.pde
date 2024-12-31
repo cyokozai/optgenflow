@@ -1,10 +1,10 @@
 int[] trialCounter;
 
 int roulleteSelection(float[][] flowers, float[] cum_probs) {
-    float r = random();
+    float r = random(1.0);
     int i = 0;
     
-    while (r <= cum_probs[i]) {
+    while (r < cum_probs[i]) {
         i++;
     }
     
@@ -24,7 +24,7 @@ float[][] employedBees(float[][] flowers) {
             
             newFlower = new float[dimensions];
             
-            newFlower[j] = flowers[i][j] + (flowers[i][j] - flowers[k][j]) * (random() * 2.0 - 1.0);
+            newFlower[j] = flowers[i][j] + (flowers[i][j] - flowers[k][j]) * (random(1.0) * 2.0 - 1.0);
             
             if (evaluationFunction(objectiveFunction(newFlower, benchmark)) > evaluationFunction(objectiveFunction(flowers[i], benchmark))) {
                 newFlowers[i] = newFlower;
@@ -51,6 +51,7 @@ float[][] onlookerBees(float[][] flowers) {
     float[]   cumFlower  = new float[dimensions];
     float[]   cumP       = new float[N];
     float     sumFitness = 0;
+    int k = 0;
     
     for (int i = 0; i < N; i++) {
         sumFitness += evaluationFunction(objectiveFunction(flowers[i], benchmark));
@@ -70,7 +71,7 @@ float[][] onlookerBees(float[][] flowers) {
             
             newFlower = new float[dimensions];
             
-            newFlower[j] = cumFlower[j] + (cumFlower[j] - flowers[k][j]) * (random() * 2.0 - 1.0);
+            newFlower[j] = cumFlower[j] + (cumFlower[j] - flowers[k][j]) * (random(1.0) * 2.0 - 1.0);
             
             if (evaluationFunction(objectiveFunction(newFlower, benchmark)) > evaluationFunction(objectiveFunction(cumFlower, benchmark))) {
                 newFlowers[i] = newFlower;

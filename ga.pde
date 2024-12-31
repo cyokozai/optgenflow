@@ -50,7 +50,7 @@ float[][] selection(float[][] population, int eliteCount) {
 
 void mutate(float[] individual) {
     for (int i = 0; i < dimensions; i++) {
-        if (random(1) < MUTATION_RATE) {
+        if (random(1.0) < MUTATION_RATE) {
             individual[i] = random(LOW, UPP);
         }
     }

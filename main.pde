@@ -54,25 +54,25 @@ void setup() {
        .setAutoClear(false)
        .setText(str(MAX_GENERATION));
 
-    cp5.addTextfield("The rate of elite selection")
+    cp5.addTextfield("GA: The rate of elite selection")
        .setPosition(20, 410)
        .setSize(200, 40)
        .setAutoClear(false)
        .setText(str(ELITE_RATE));
 
-    cp5.addTextfield("The rate of mutation")
+    cp5.addTextfield("GA: The rate of mutation")
        .setPosition(20, 480)
        .setSize(200, 40)
        .setAutoClear(false)
        .setText(str(MUTATION_RATE));
 
-    cp5.addTextfield("The scaling factor (F)")
+    cp5.addTextfield("DE: The scaling factor (F)")
        .setPosition(20, 550)
        .setSize(200, 40)
        .setAutoClear(false)
        .setText(str(F));
 
-    cp5.addTextfield("The crossover rate (CR)")
+    cp5.addTextfield("DE: The crossover rate (CR)")
        .setPosition(20, 620)
        .setSize(200, 40)
        .setAutoClear(false)
@@ -143,6 +143,25 @@ void draw() {
         text(nf(fitness, 0, 4), x, y - 10);
     }
 
+    // ベンチマークの最小値の座標に☆マークを表示
+    float minX = 0;
+    float minY = 0;
+    if (benchmark.equals("SPHERE") || benchmark.equals("RASTRIGIN")) {
+        minX = 0;
+        minY = 0;
+    } else if (benchmark.equals("ROSENBROCK")) {
+        minX = 1;
+        minY = 1;
+    }
+    float starX = map(minX, LOW, UPP, 0, width);
+    float starY = map(minY, LOW, UPP, height, 0);
+    fill(255, 215, 0);
+    textSize(32);
+    textAlign(CENTER);
+    text("☆", starX, starY);
+    textSize(14);
+    text("x: " + nf(minX, 0, 4) + ", y: " + nf(minY, 0, 4), starX, starY + 20);
+
     if (generation < MAX_GENERATION) {
         if (movie == true) {
             gif.addFrame();
@@ -201,11 +220,11 @@ void initializePopulation() {
     benchmark      = cp5.get(Textfield.class, "Which benchmark function? \n (SPHERE, ROSENBROCK, RASTRIGIN)").getText();
     method         = cp5.get(Textfield.class, "Which optimization method? \n (GA, DE, ABC)").getText();
     MAX_GENERATION = int(cp5.get(Textfield.class, "The number of maximum generations").getText());
-    ELITE_RATE     = float(cp5.get(Textfield.class, "The rate of elite selection").getText());
-    MUTATION_RATE  = float(cp5.get(Textfield.class, "The rate of mutation").getText());
-    F              = float(cp5.get(Textfield.class, "The scaling factor (F)").getText());
-    CR             = float(cp5.get(Textfield.class, "The crossover rate (CR)").getText());
-
+    ELITE_RATE     = float(cp5.get(Textfield.class, "GA: The rate of elite selection").getText());
+    MUTATION_RATE  = float(cp5.get(Textfield.class, "GA: The rate of mutation").getText());
+    F              = float(cp5.get(Textfield.class, "DE: The scaling factor (F)").getText());
+    CR             = float(cp5.get(Textfield.class, "DE: The crossover rate (CR)").getText());
+    
     population = new float[N][dimensions];
     best       = new float[dimensions];
 
@@ -225,7 +244,7 @@ void initializePopulation() {
 
     if (method.equals("ABC")) {
         trialCounter = new int[N];
-        
+
         for (int i = 0; i < N; i++) {
             trialCounter[i] = 0;
         }

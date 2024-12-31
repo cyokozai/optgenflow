@@ -1,20 +1,3 @@
-void setup() {
-    if (benchmark.equals("SPHERE")) {
-        float F  = 0.4;
-        float CR = 0.6;
-    } else if (benchmark.equals("ROSENBROCK")) {
-        float F  = 0.5;
-        float CR = 0.8;
-    } else if (benchmark.equals("RASTRIGIN")) {
-        float F  = 0.5;
-        float CR = 0.7;
-    } else {
-        println("Unknown benchmark type: " + benchmark);
-
-        exit();
-    }
-}
-
 float[][] bincrossover(float[] parent1, float[] parent2) {
     int point1 = int(random(dimensions));
     int point2 = int(random(dimensions));
@@ -60,7 +43,7 @@ void differentialEvolution() {
         }
 
         for (int j = 0; j < dimensions; j++) {
-            if (random(1) < CR || j == int(random(dimensions))) {
+            if (random(1.0) < CR || j == int(random(dimensions))) {
                 trial[j] = mutant[j];
             } else {
                 trial[j] = population[i][j];
