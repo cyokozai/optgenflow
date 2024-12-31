@@ -156,11 +156,11 @@ void draw() {
     float starX = map(minX, LOW, UPP, 0, width);
     float starY = map(minY, LOW, UPP, height, 0);
     fill(255, 215, 0);
-    textSize(32);
+    textSize(18);
     textAlign(CENTER);
-    text("☆", starX, starY);
+    text("☆", starX, starY + 5);
     textSize(14);
-    text("x: " + nf(minX, 0, 4) + ", y: " + nf(minY, 0, 4), starX, starY + 20);
+    text("x: " + nf(minX, 0, 2) + ", y: " + nf(minY, 0, 2), starX, starY + 20);
 
     if (generation < MAX_GENERATION) {
         if (movie == true) {
