@@ -154,13 +154,14 @@ void draw() {
     // Draw the best individual
     float bestX = map(best[0], LOW, UPP, 0, width);
     float bestY = map(best[1], LOW, UPP, height, 0);
-    
+    float bestFitness = evaluationFunction(objectiveFunction(best, benchmark));
+
     fill(255, 0, 0);
     ellipse(bestX, bestY, 10, 10);
     fill(0);
     textSize(14);
     textAlign(CENTER);
-    text(nf(fitness, 0, 4), bestX, bestY - 10);
+    text(nf(bestFitness, 0, 4), bestX, bestY - 10);
 
     // Draw the solution
     fill(255, 215, 0);
@@ -178,7 +179,7 @@ void draw() {
         evolvePopulation();
 
         println("Best individual: [" + nf(best[0], 0, 4) + ", " + nf(best[1], 0, 4) + "]");
-        println("Best fitness: " + evaluationFunction(objectiveFunction(best, benchmark)));
+        println("Best fitness: " + bestFitness);
     } else { // Optimization finished
         startOptimization = false;
 
