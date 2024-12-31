@@ -1,0 +1,33 @@
+name: CI for Processing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-11-jdk wget unzip
+        wget https://download.processing.org/processing-4.1.2-linux64.tgz
+        tar -xvzf processing-4.1.2-linux64.tgz
+        sudo mv processing-4.1.2 /usr/local/processing
+        sudo ln -s /usr/local/processing/processing-java /usr/local/bin/processing-java
+
+    - name: Verify installation
+      run: processing-java --version
+
+    - name: Run Processing sketch
+      run: |
+        processing-java --sketch=`pwd`./ --run
