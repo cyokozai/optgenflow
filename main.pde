@@ -92,7 +92,7 @@ void setup() {
        });
 
     cp5.addCheckBox("recordGif")
-       .setPosition(20, 760)
+       .setPosition(620, 760)
        .setSize(20, 20)
        .setItemsPerRow(1)
        .setSpacingColumn(50)
