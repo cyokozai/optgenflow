@@ -4,7 +4,7 @@ int roulleteSelection(float[] cum_probs) {
     float r = random(1.0);
     int i = 0;
     
-    while (i < cum_probs.length && r > cum_probs[i]) {
+    while (i < cum_probs.length - 1 && r > cum_probs[i]) {
         i++;
     }
     
@@ -59,6 +59,9 @@ float[][] onlookerBees(float[][] flowers) {
 
     for (int i = 0; i < N; i++) {
         cumP[i] = evaluationFunction(objectiveFunction(flowers[i], benchmark)) / sumFitness;
+        if (i > 0) {
+            cumP[i] += cumP[i - 1];
+        }
     }
 
     for (int i = 0; i < N; i++) {
