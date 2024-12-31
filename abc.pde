@@ -1,15 +1,5 @@
 int[] trialCounter;
 
-void setup() {
-    trialCounter = new int[N];
-
-    if (method.equals("ABC")) {
-        for (int i = 0; i < N; i++) {
-            trialCounter[i] = 0;
-        }
-    }
-}
-
 int roulleteSelection(float[][] flowers, float[] cum_probs) {
     float r = random();
     int i = 0;

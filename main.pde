@@ -66,8 +66,20 @@ void setup() {
        .setAutoClear(false)
        .setText(str(MUTATION_RATE));
 
+    cp5.addTextfield("The scaling factor (F)")
+       .setPosition(20, 550)
+       .setSize(200, 40)
+       .setAutoClear(false)
+       .setText(str(F));
+
+    cp5.addTextfield("The crossover rate (CR)")
+       .setPosition(20, 620)
+       .setSize(200, 40)
+       .setAutoClear(false)
+       .setText(str(CR));
+
     cp5.addButton("start")
-       .setPosition(20, 560)
+       .setPosition(20, 690)
        .setSize(200, 40)
        .setColorBackground(color(30, 220, 80))
        .onClick(new CallbackListener() {
@@ -80,7 +92,7 @@ void setup() {
        });
 
     cp5.addCheckBox("recordGif")
-       .setPosition(20, 620)
+       .setPosition(20, 760)
        .setSize(20, 20)
        .setItemsPerRow(1)
        .setSpacingColumn(50)
@@ -177,7 +189,7 @@ void draw() {
 }
 
 void mousePressed() {
-    if (mouseX > 20 && mouseX < 40 && mouseY > 620 && mouseY < 640) {
+    if (mouseX > 20 && mouseX < 40 && mouseY > 760 && mouseY < 780) {
         movie = !movie;
         println("Movie recording: " + movie);
     }
@@ -191,6 +203,8 @@ void initializePopulation() {
     MAX_GENERATION = int(cp5.get(Textfield.class, "The number of maximum generations").getText());
     ELITE_RATE     = float(cp5.get(Textfield.class, "The rate of elite selection").getText());
     MUTATION_RATE  = float(cp5.get(Textfield.class, "The rate of mutation").getText());
+    F              = float(cp5.get(Textfield.class, "The scaling factor (F)").getText());
+    CR             = float(cp5.get(Textfield.class, "The crossover rate (CR)").getText());
 
     population = new float[N][dimensions];
     best       = new float[dimensions];
@@ -207,6 +221,14 @@ void initializePopulation() {
     } else {
         println("Unknown benchmark type: " + benchmark);
         exit();
+    }
+
+    if (method.equals("ABC")) {
+        trialCounter = new int[N];
+        
+        for (int i = 0; i < N; i++) {
+            trialCounter[i] = 0;
+        }
     }
     
     for (int i = 0; i < N; i++) {
