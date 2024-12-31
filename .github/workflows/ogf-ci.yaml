@@ -30,8 +30,8 @@ jobs:
 
     - name: Run Processing sketch
       run: |
-        processing-java ./ --run
+        processing-java --sketch=`pwd` --run
     
     - name: Build Processing sketch
       run: |
-        processing-java ./ --build
+        processing-java --sketch=`pwd` --build
