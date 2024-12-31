@@ -32,7 +32,7 @@ jobs:
         wget https://github.com/sojamo/controlp5/releases/download/v2.2.5/controlP5-2.2.5.zip
         unzip controlP5-2.2.5.zip
         wget https://github.com/extrapixel/gif-animation/raw/master/distribution/gifAnimation.zip
-        unzip aifAnimation.zip
+        unzip gifAnimation.zip
 
     - name: Verify installation
       run: processing-java --help
