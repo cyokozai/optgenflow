@@ -14,7 +14,11 @@ float[][] population; // population
 float[] best;         // best individual
 float UPP = 0.0;      // upper
 float LOW = 0.0;      // lower
-int generation = 0;
+float minX = 0.0;     // minimum x
+float minY = 0.0;     // minimum y
+float starX = 0.0;    // solution x
+float starY = 0.0;    // solution y
+int generation = 0;   // generation
 
 void setup() {
     size(800, 800);
@@ -105,12 +109,13 @@ void setup() {
 }
 
 void draw() {
-    if (!startOptimization) {
+    if (!startOptimization) { // Wait for the user to press the start button
         return;
-    } else {
+    } else { // Optimization started
         generation++;
     }
 
+    // Record gif
     if (generation == 1 && movie == true) {
         gif = new GifMaker(this, "./image/" + benchmark + "_" + method + ".gif");
         fc  = frameCount;
@@ -119,41 +124,45 @@ void draw() {
         gif.setDelay(40);
     }
 
+    // Draw the benchmark function
     background(255);
     noStroke();
     drawBenchmarkContours(benchmark, LOW, UPP, LOW, UPP, 1000, 1000);
 
+    // Draw the generation number
     println("Generation: " + generation);
     fill(255);
     textSize(24);
     textAlign(LEFT);
     text("Generation: " + generation, 40, height - 20);
 
+    // Draw the population
     for (int i = 0; i < N; i++) {
         float[] position = population[i];
         float fitness = evaluationFunction(objectiveFunction(position, benchmark));
 
         float x = map(position[0], LOW, UPP, 0, width);
         float y = map(position[1], LOW, UPP, height, 0);
-        ellipse(x, y, 10, 10);
 
         fill(0);
+        ellipse(x, y, 10, 10);
         textSize(14);
         textAlign(CENTER);
         text(nf(fitness, 0, 4), x, y - 10);
     }
 
-    float minX = 0;
-    float minY = 0;
-    if (benchmark.equals("SPHERE") || benchmark.equals("RASTRIGIN")) {
-        minX = 0;
-        minY = 0;
-    } else if (benchmark.equals("ROSENBROCK")) {
-        minX = 1;
-        minY = 1;
-    }
-    float starX = map(minX, LOW, UPP, 0, width);
-    float starY = map(minY, LOW, UPP, height, 0);
+    // Draw the best individual
+    float bestX = map(best[0], LOW, UPP, 0, width);
+    float bestY = map(best[1], LOW, UPP, height, 0);
+    
+    fill(255, 0, 0);
+    ellipse(bestX, bestY, 10, 10);
+    fill(0);
+    textSize(14);
+    textAlign(CENTER);
+    text(nf(fitness, 0, 4), bestX, bestY - 10);
+
+    // Draw the solution
     fill(255, 215, 0);
     textSize(18);
     textAlign(CENTER);
@@ -161,7 +170,7 @@ void draw() {
     textSize(14);
     text("x: " + nf(minX, 0, 2) + ", y: " + nf(minY, 0, 2), starX, starY + 20);
 
-    if (generation < MAX_GENERATION) {
+    if (generation < MAX_GENERATION) { // Continue optimization
         if (movie == true) {
             gif.addFrame();
         }
@@ -170,7 +179,7 @@ void draw() {
 
         println("Best individual: [" + nf(best[0], 0, 4) + ", " + nf(best[1], 0, 4) + "]");
         println("Best fitness: " + evaluationFunction(objectiveFunction(best, benchmark)));
-    } else {
+    } else { // Optimization finished
         startOptimization = false;
 
         if (movie == true) {
@@ -203,7 +212,7 @@ void draw() {
            .setColorBackground(color(255, 190, 0));
     }
 
-    delay(50);
+    delay(20);
 }
 
 void mousePressed() {
@@ -230,16 +239,25 @@ void initializePopulation() {
     if (benchmark.equals("SPHERE")) {
         UPP =  5.0;
         LOW = -5.0;
+        minX = 0;
+        minY = 0;
     } else if (benchmark.equals("ROSENBROCK")) {
         UPP =  2.0;
         LOW = -2.0;
+        minX = 1;
+        minY = 1;
     } else if (benchmark.equals("RASTRIGIN")) {
         UPP =  5.12;
         LOW = -5.12;
+        minX = 0;
+        minY = 0;
     } else {
         println("Unknown benchmark type: " + benchmark);
         exit();
     }
+
+    starX = map(minX, LOW, UPP, 0, width);
+    starY = map(minY, LOW, UPP, height, 0);
 
     if (method.equals("ABC")) {
         trialCounter = new int[N];
