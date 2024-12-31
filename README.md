@@ -1,7 +1,7 @@
 ```text
  _____         ______     ____               __________  ______
 /\  __`\         __\ \__ /\  _`\               __/_\  _`\   __ \
-_ \ \/\ \   _____ \ \ ,_\\ \ \L\_\   ____     ___ __\ \L\_\\//\ \      ___    __  __  __
+_ \ \/\ \   _____ \ \ ,_\quad\ \L\_\   ____     ___ __\ \L\_\\//\ \      ___    __  __  __
 __ \ \ \ \ /\ '__`\\ \ \/ \ \ \L_L  __'__`\ /' _ `\\ \  _\/  \ \ \    / __`\ /\ \/\ \/\ \
 ____\ \_\ \\ \ \L\ \\ \ \___ \ \/, \/\  __/ /\ \/\ \\ \ \/____\_\ \_ /\ \L\ \\ \ \_/ \_/ \
  ____\_____\\ \ ,__/ \ \__\___\____/\ \____\\ \_\ \_\\ \_\  ___\____\\ \____/__ \___^___/'
@@ -64,19 +64,19 @@ By transforming abstract algorithmic processes into clear, engaging visualizatio
 
 - Sphere function | Genetic Algorithm  
    ```math
-   \displaystyle f\left(\boldsymbol{x}\right)  = \sum_{i=1}^{D} x_i^2  \\
+   \displaystyle f\left(\boldsymbol{x}\right)  = \sum_{i=1}^{D} x_i^2  \quad
    [-5.12, 5.12], \quad f\left(0, \ldots, 0\right) = 0  
    ```
    ![sphere-ga](./image/SPHERE_GA.gif)  
 - Rastrigin function | Artificial Bee Colony Algorithm  
    ```math
-   \displaystyle f\left(\boldsymbol{x}\right)  = 10D + \sum_{i=1}^{D} \left[ x_i^2 - 10 \cos(2\pi x_i) \right]  \\
+   \displaystyle f\left(\boldsymbol{x}\right)  = 10D + \sum_{i=1}^{D} \left[ x_i^2 - 10 \cos(2\pi x_i) \right]  \quad
    [-5.12, 5.12], \quad f\left(0, \ldots, 0\right) = 0  
    ```
    ![rastrigin-abc](./image/RASTRIGIN_ABC.gif)  
 - Rosenbrock finction | Differential Evolution
    ```math  
-   \displaystyle f\left(\boldsymbol{x}\right)  = \sum_{i=1}^{D-1} \left[ 100 (x_{i+1} - x_i^2)^2 + (1 - x_i)^2 \right]  \\
+   \displaystyle f\left(\boldsymbol{x}\right)  = \sum_{i=1}^{D-1} \left[ 100 (x_{i+1} - x_i^2)^2 + (1 - x_i)^2 \right]  \quad
    [-5.00, 5.00], \quad f\left(1, \ldots, 1\right) = 0  
    ```
    ![rosenbrock-de](./image/ROSENBROCK_DE.gif)  
