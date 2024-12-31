@@ -162,7 +162,7 @@ void draw() {
     textSize(14);
     text("x: " + nf(minX, 0, 2) + ", y: " + nf(minY, 0, 2), starX, starY + 20);
 
-    if (generation < MAX_GENERATION) {
+    if (generation < MAX_GENERATION || nf(evaluationFunction(objectiveFunction(best, benchmark)), 0, 4) <= 0.9999) {
         if (movie == true) {
             gif.addFrame();
         }
