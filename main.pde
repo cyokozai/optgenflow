@@ -143,7 +143,6 @@ void draw() {
         text(nf(fitness, 0, 4), x, y - 10);
     }
 
-    // ベンチマークの最小値の座標に☆マークを表示
     float minX = 0;
     float minY = 0;
     if (benchmark.equals("SPHERE") || benchmark.equals("RASTRIGIN")) {

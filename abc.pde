@@ -17,12 +17,12 @@ float[][] employedBees(float[][] flowers) {
     int k = 0;
     
     for (int i = 0; i < N; i++) {
+        newFlower = new float[dimensions];
+        
         for (int j = 0; j < dimensions; j++) {      
             do {
                 k = int(random(N));
             } while (k == i);
-            
-            newFlower = new float[dimensions];
             
             newFlower[j] = flowers[i][j] + (flowers[i][j] - flowers[k][j]) * (random(1.0) * 2.0 - 1.0);
             
@@ -66,13 +66,12 @@ float[][] onlookerBees(float[][] flowers) {
 
     for (int i = 0; i < N; i++) {
         cumFlower = flowers[roulleteSelection(cumP)];
+        newFlower = new float[dimensions];
         
         for (int j = 0; j < dimensions; j++) {
             do {
                 k = int(random(N));
             } while (k == i);
-            
-            newFlower = new float[dimensions];
             
             newFlower[j] = cumFlower[j] + (cumFlower[j] - flowers[k][j]) * (random(1.0) * 2.0 - 1.0);
             
